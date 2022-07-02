@@ -1,0 +1,96 @@
+<%- include('../includes/head.ejs')%>
+<link rel="stylesheet" href="/css/auth.css">
+</head>
+<body>
+    <%- include('../includes/nav.ejs')%>
+    <main>
+        <h2><% if(editing){ %>Edit Story<% }else{ %>Add Story<% } %></h2>
+        <% if(errorMsg) { %>
+            <div class="errorMsg"><%= errorMsg %></div>
+        <% } %>
+        <form class="login-form" action="/<% if(editing){ %>edit_story<%}else{%>add_story<% } %>" method="POST" enctype="multipart/form-data">
+            <div class="form-control">
+                <label for="title">Title</label>
+                <input 
+                    type="text" 
+                    name="title"
+                    class="<%= validationError.find(e => e.param === 'title') ? 'invalid' : '' %>"
+                    value="<% if(editing || hasError ){ %><%= story.title %><% } %>"
+                >
+            </div>
+            <div class="form-control">
+                <label for="body">Body</label>
+                <textarea 
+                    name="story" 
+                    cols="30" 
+                    rows="5"
+                    class="<%= validationError.find(e => e.param === 'story') ? 'invalid' : '' %>"
+                    ><% if(editing || hasError ){ %><%= story.body %><% } %>
+                </textarea>
+            </div>
+            <div class="form-control">
+                <label for="tags">Add Tags</label>
+                <select name="tag" id="">
+                    <option value="<% if(editing || hasError ){ %>
+                            <% if(story.tags){ %>
+                                <%= story.tags[0].tag%>
+                            <% } %>
+                        <% }else{ %>
+                            ''
+                        <% } %>">
+                        <% if(editing || hasError ){ %>
+                            <% if(story.tags){ %>
+                                <%= story.tags[0].tag%>
+                            <% } %>
+                        <% }else{ %>
+                            Select tag
+                        <% } %>
+                    </option>
+                    <% if(tags.length > 0){ %>
+                        <% for(let tag of tags){ %>
+                            <option value="<%= tag.tag %>" class="">
+                                <%= tag.tag %>
+                            </option>
+                        <% } %>
+                    <% }else{ %>
+                        <option value="">Choose tags</option>
+                    <% } %>
+                </select>
+            </div>
+            <div class="form-control">
+                <label for="status">Chose status</label>
+                <select name="isPublic">
+                    <option value="
+                        <% if(editing || hasError ){ %>
+                            <% if(story.isPublic===true){ %>
+                                1
+                            <% }else{ %>
+                                0
+                            <% } %>
+                        <% }else{ %>
+                            ''
+                        <% } %>">
+                        <% if(editing || hasError ){ %>
+                            <% if(story.isPublic === true){ %>
+                                Public
+                            <% }else{ %>
+                                Private
+                            <% } %>
+                        <% }else{ %>
+                            Select status
+                        <% } %>
+                    </option>
+                    <option value="1">Public</option>
+                    <option value="0">Private</option>
+                </select>
+            </div>
+            <div class="form-control">
+                <label for="image">Add Photo</label>
+                <input type="file" name="image" value="<% if(editing || hasError){ %><%= story.image%><% } %>">
+            </div>
+            <input type="hidden" value="<% if(editing){%><%= story.id%><% }else{ %><%= story.storyId%><% } %>" name="storyId">
+            <!-- <input type="hidden" value="<% if(editing){%><%= story.tags[0].id%><% }else{ %><%= story.tagId%><% } %>" name="tagId"> -->
+            <button class="btn" type="submit"><% if(editing){ %>Edit Story<%}else{%>Add Story<% } %></button>
+        </form>
+    </main>
+<%- include('../includes/footer.ejs') %>

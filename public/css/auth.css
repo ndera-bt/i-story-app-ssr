@@ -1,0 +1,27 @@
+.form-control label,
+.form-control input,
+.form-control textarea {
+    display: block;
+    width: 100%;
+}
+
+.form-control input,
+.form-control select,
+.form-control textarea {
+    font: inherit;
+    border: 1px solid #550847;
+    border-radius: 3px;
+    padding: 6px;
+    margin: 0.5rem 0rem;
+}
+
+.login-form {
+    margin: auto;
+    width: 20rem;
+    max-width: 90%;
+
+}
+
+.form-control input.invalid {
+    border-color: #b30909;
+}

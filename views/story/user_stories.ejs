@@ -1,0 +1,59 @@
+<%- include('../includes/head.ejs')%>
+</head>
+<body>
+    <%- include('../includes/nav.ejs')%>
+    <main>
+        <h2>Your Stories</h2>
+        <% if(errorMsg){ %>
+            <div class="errorMsg"><%= errorMsg %></div>
+        <% } %>
+        <% if(data.length > 0){ %>
+            <table>
+                <tr>
+                    <th>Photo</th>
+                    <th>Title</th>
+                    <th>Body</th>
+                    <th>Tags</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+                <% for(let story of data){ %>
+                    <tr>
+                        <td>
+                            <img src="<%= story.image %>" alt="">
+                        </td>
+                        <td>
+                            <%= story.title %>
+                        </td>
+                        <td>
+                            <%= story.body.substr(0, 40) %>...
+                        </td>
+                        <td>
+                            <%= story.tags[0].tag %>
+                        </td>
+                        <td>
+                            <% if(story.isPublic === true){ %>
+                                public
+                            <% }else{ %>
+                                private
+                            <% } %>
+                            
+                        </td>
+                        <td>
+                            <a href="/edit_story/<%= story.id%>?edit=true">Edit</a>
+                            <a href="/story_details/<%= story.id%>">View</a>
+                            <form action="/delete_story" method="POST">
+                                <input type="hidden" name="storyId" value="<%= story.id%>">
+                                <input type="hidden" name="tagId" value="<%= story.tags[0].id%>">
+                                <button type="submit">Drop</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% } %>
+            </table>
+        <% }else{ %>
+            <h2>No stories yet</h2>
+        <% } %>
+
+    </main>
+<%- include('../includes/footer.ejs')%>

@@ -1,0 +1,31 @@
+<header class="main-header">
+    <nav class="header-nav">
+        <ul class="header-list">
+            <li class="header-item">
+                <a href="/">Home</a>
+            </li>
+            <% if(isAuthenticated) { %>
+                <li class="header-item">
+                    <a href="/add_story">Add Story</a>
+                </li>
+                <li class="header-item">
+                    <a href="/user_stories">My Stories</a>
+                </li>
+            <% } %>
+            <% if(!isAuthenticated){ %>
+                <li class="header-item">
+                    <a href="/login">Login</a>
+                </li>
+                <li class="header-item">
+                    <a href="/signup">Signup</a>
+                </li>
+            <% }else{ %>
+                <li class="header-item">
+                    <form action="/logout" method="POST">
+                        <button type="submit">Logout</button>
+                    </form>
+                </li>
+            <% } %>
+        </ul>
+    </nav>
+</header>

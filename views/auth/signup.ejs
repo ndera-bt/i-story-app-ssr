@@ -1,0 +1,56 @@
+<%- include('../includes/head.ejs')%>
+<link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+    <%- include('../includes/nav.ejs')%>
+    <main>
+        <h2>Signup</h2>
+        <% if (errorMsg) { %>
+            <div class="errorMsg">
+                <%= errorMsg %>
+            </div>
+        <% } %>
+        <form action="/signup" class="login-form" method="POST">
+            <div class="form-control">
+                <label for="name">Name</label>
+                <input 
+                    type="text" 
+                    name="name" 
+                    class="<%= validationError.find(e => e.param === 'name') ? 'invalid' : ''  %>"
+                    value="<%= oldInput.name %>"
+                >
+            </div>
+            <div class="form-control">
+                <label for="email">Email</label>
+                <input 
+                    type="email" 
+                    name="email" 
+                    class="<%= validationError.find(e => e.param === 'email') ? 'invalid' : ''  %>"
+                    value="<%= oldInput.email %>"
+                >
+            </div>
+            <div class="form-control">
+                <label for="password">Password</label>
+                <input 
+                    type="password" 
+                    name="password" 
+                    class="<%= validationError.find(e => e.param === 'passsword') ? 'invalid' : ''  %>"
+                    value="<%= oldInput.password %>"
+                >
+            </div>
+            <div class="form-control">
+                <label for="confpassword">Confirm Password</label>
+                <input 
+                    type="password" 
+                    name="confpassword" 
+                    class="<%= validationError.find(e => e.param === 'confpassword') ? 'invalid' : ''  %>"
+                    value="<%= oldInput.confpassword %>"
+                >
+            </div>
+            <button class="btn" type="submit">Signup</button>
+        </form>
+
+    </main>
+
+
+<%- include('../includes/footer.ejs')%>

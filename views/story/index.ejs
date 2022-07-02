@@ -1,0 +1,45 @@
+<%- include('../includes/head.ejs') %>
+</head>
+<body>
+    <%- include('../includes/nav.ejs') %>
+    <main>
+        <% if(stories.length > 0) { %>
+            <h2>WELCOME TO OUR STORIES PAGE</h2>
+            <hr>
+            <div class="flex-container">
+                <div class="grid">
+                    <% for(let story of stories) { %>
+                        <article class="story-content">
+                            <div class="story-title">
+                                <h3 class="title"><%= story.title %></h3>
+                            </div>
+                            <% if(story.image){ %>
+                                <div class="content">
+                                    <img src="<%= story.image %>" alt="" class="image">
+                                </div>
+                            <% }else{ %>
+                            <% } %>
+                            <div class="content">
+                                <p><%= story.body.substr(0, 30) %>...</p>
+                                <p>
+                                    <a href="story_details/<%= story.id%>"><%= story.tags[0].tag %></a>
+                                </p>
+                            </div>
+                            <div class="detail">
+                                <a href="story_details/<%= story.id%>" class="btn">Read More..</a>
+                            </div>
+                        </article>
+                    <% } %>
+                </div>
+            </div>
+            <%- include('../includes/pagination.ejs', {currentPage: currentPage, nextPage: nextPage, hasNextPage: hasNextPage, hasPreviousPage: hasPreviousPage, lastPage: lastPage, previousPage: previousPage})%>
+        <% }else{ %>
+            <div class="content">
+                <h2>Story not found</h2>
+            </div>
+        <% } %>
+
+    </main>
+
+<%- include('../includes/footer.ejs') %>
+
