@@ -14,7 +14,7 @@
                 type="email" 
                 name="email"
                 class="<%= validationError.find(e => e.param === 'email') ? 'invalid' : '' %>"
-                value="<%= oldInput.email %>"
+                value="<%= data.email %>"
             >
         </div>
         <div class="form-control">
@@ -23,7 +23,7 @@
                 type="password" 
                 name="password"
                 class="<%= validationError.find(e => e.param === 'password') ? 'invalid' : '' %>"
-                value="<%= oldInput.password %>"
+                value="<%= data.password %>"
             >
         </div>
         <button class="btn" type="submit">Login</button>

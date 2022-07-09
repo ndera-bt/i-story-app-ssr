@@ -23,7 +23,7 @@ const User = sequelize.define("user", {
   },
 });
 
-User.beforeCreate(async (user, options) => {
+User.beforeCreate(async (user) => {
   const hashed = await PasswordManager.hash(user.password);
   user.password = hashed;
 });

@@ -33,7 +33,9 @@ router.post(
   "/login",
   [
     check("email", "Invalid email").isEmail().normalizeEmail(),
-    body("password", "Invalid Password").trim().isLength({ min: 5 }),
+    body("password", "Password length must not be less than five characters")
+      .trim()
+      .isLength({ min: 5 }),
   ],
   Authcontroller.postLogin
 );

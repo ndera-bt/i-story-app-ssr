@@ -18,7 +18,7 @@ exports.getLogin = (req, res, next) => {
     pageTitle: "Login",
     errorMsg: "",
     validationError: [],
-    oldInput: "",
+    data: "",
   });
 };
 
@@ -73,7 +73,7 @@ exports.postLogin = async (req, res, next) => {
     return Response.error(
       "auth/login",
       "Login",
-      "Invalid credentials",
+      error.message,
       [],
       { email, password },
       res

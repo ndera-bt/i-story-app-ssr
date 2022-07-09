@@ -31,8 +31,4 @@ const Story = sequelize.define("story", {
   },
 });
 
-// sequelize.addHook("beforeCount", (options) => {
-//   options.group = ["id"];
-// });
-
 module.exports = Story;
